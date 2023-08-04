@@ -113,4 +113,52 @@ class DoublyLinkedList {
 		// Step 5: Return the list.
 		return this;
 	}
+
+	get(index) {
+		// Step 1: If the index is less than 0 or greater or equal to the length, return null.
+		if (index < 0 || index >= this.length) return null;
+
+		let currentNode;
+		let rightIndex = 0;
+		let leftIndex = this.length - 1;
+		let middle = Math.floor(this.length / 2);
+
+		// Step 2: If the index is less than or equal to half the length of the list.
+		if (index <= middle) {
+			// Step 2.1: Loop through the list starting from the head and loop towards the middle.
+			// Return the node once it is found.
+			// Start from head
+			currentNode = this.head;
+			while (rightIndex !== index) {
+				currentNode = currentNode.next;
+				rightIndex++;
+			}
+			// Step 3: If the index is greater than half the length of the list.
+		} else {
+			// Start from tail
+			currentNode = this.tail;
+			// Step 3.1: Loop through the list starting from the tail and loop towards the middle.
+			// Return the node once it is found.
+			while (leftIndex !== index) {
+				currentNode = currentNode.prev;
+				leftIndex--;
+			}
+		}
+		// Step 4: Return the node at the specified index.
+		return currentNode;
+	}
+
+	set(index, value) {
+		// Step 1: Use the get method to find the specific node.
+		let foundNode = this.get(index);
+
+		// Step 2: If the node is found, set the value of that node to be the value passed to the function and return true.
+		if (foundNode.value !== null) {
+			foundNode = value;
+			return true;
+		}
+
+		// Step 3: If the node is not found, return false.
+		return false;
+	}
 }
