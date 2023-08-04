@@ -161,4 +161,69 @@ class DoublyLinkedList {
 		// Step 3: If the node is not found, return false.
 		return false;
 	}
+
+	insert(index, value) {
+		// Step 1: If the index is less than zero or greater than the length, return false.
+		if (index < 0 || index > this.length) return false;
+
+		// Step 2: If the index is 0, unshift a new node to the start of the list.
+		if (index === 0) return !!this.unshift(value);
+
+		// Step 3: If the index is the same as the length, push a new node to the end of the list.
+		if (index === this.length) !!this.push(value);
+
+		// Step 4: Otherwise, use the get method to access the index - 1.
+		let newNode = new Node(value);
+		let prevNode = this.get(index - 1);
+		let nextNode = prevNode.next;
+
+		// Step 5: Have the previous property on the new node be the previous node.
+		newNode.prev = prevNode;
+
+		// Step 6: Have the next property on the new node be the after node.
+		newNode.next = nextNode;
+
+		// Step 7: Have the next property on the before node be the new node.
+		prevNode.next = newNode;
+
+		// Step 8: Have the previous property on the after node be the new node.
+		nextNode.prev = newNode;
+
+		// Step 9: Increment the length.
+		this.length++;
+
+		// Step 10: Return true.
+		return true;
+	}
+
+	remove(index) {
+		// Step 1: If the index is less than zero or greater than or equal to the length, return undefined.
+		if (index < 0 || index >= this.length) return undefined;
+
+		// Step 2: If the index is 0, shift a node from the start of the list.
+		if (index === 0) return this.shift();
+
+		// Step 3: If the index is the same as the length-1, pop a node from the end of the list.
+		if (index === this.length - 1) return this.pop();
+
+		// Step 4: Use the get method to retrieve the item to be removed.
+		let removedNode = this.get(index);
+
+		// Step 5: Update the next and prev properties to remove the found node from the list.
+		let afterNode = removedNode.next;
+		let prevNode = removedNode.prev;
+
+		afterNode.prev = prevNode;
+		prevNode.next = afterNode;
+
+		// Step 6: Disconnect the removed node from the list (clean up).
+		removedNode.next = null;
+		removedNode.prev = null;
+
+		// Step 7: Decrement the length.
+		this.length--;
+
+		// Step 8: Return the removed node.
+		return removedNode;
+	}
 }
