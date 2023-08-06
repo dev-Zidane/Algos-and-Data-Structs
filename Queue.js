@@ -36,7 +36,7 @@ class Queue {
 		if (this.first === this.last) {
 			this.last = null;
 		} else {
-			// Update the front to be the next node
+			// Update the front to be the next nodeg
 			this.first = this.first.next;
 			this.size--;
 			return temp.value;
