@@ -87,4 +87,20 @@ class BinarySearchTree {
 
 		return data; // Return the visited nodes' values.
 	}
+
+	inOrder() {
+		let data = []; // Create an array to store the values of the visited nodes
+
+		let current = this.root; // Start from the root of the tree.
+
+		function traverse(node) {
+			if (node.left) traverse(node.left);
+			data.push(node.value);
+
+			if (node.right) traverse(node.right);
+		}
+		traverse(current); // Start the traversal with the root node.
+
+		return data;
+	}
 }
