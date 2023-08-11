@@ -34,13 +34,58 @@ class Graph {
 
 	// Method to remove a vertex and all its edges from the graph
 	removeVertex(vertex) {
-		// Loop through the adjacency list of the vertex to remove
+		// Step 1: Remove all edges connecting the vertex to others
+		// Iterate through the adjacency list for the vertex
 		while (this.adjacencyList[vertex].length) {
-			// Remove each edge connected to the vertex
+			// Remove each connected vertex by calling the previously defined removeEdge method
 			const adjacentVertex = this.adjacencyList[vertex].pop();
 			this.removeEdge(vertex, adjacentVertex);
 		}
-		// Finally, delete the vertex itself
+		// Step 2: Delete the entry for the vertex itself
 		delete this.adjacencyList[vertex];
 	}
+
+	dfsRecursive(start) {
+		// Result array to store the order of traversal
+		const result = [];
+		// Object to store visited vertices
+		let visited = {};
+		// Alias adjacencyList so that it can be accessed within the helper function
+		const adjacencyList = this.adjacencyList;
+
+		// Helper function to perform the recursion
+		(function dfs(vertex) {
+			// If the vertex is null or undefined, return
+			if (!vertex) return null;
+			// Mark the vertex as visited
+			visited[vertex] = true;
+			// Add the vertex to the result array
+			result.push(vertex);
+
+			// Visit all neighbors that have not been visited
+			for (vertex in adjacencyList) {
+				if (!visited[vertex]) {
+					return dfs(vertex);
+				}
+			}
+		})(start); // Immediately invoke the dfs function with the start vertex
+		return result; // Return the result array
+	}
 }
+
+let g = new Graph();
+
+g.addVertex('A');
+g.addVertex('B');
+g.addVertex('C');
+g.addVertex('D');
+g.addVertex('E');
+g.addVertex('F');
+
+g.addEdge('A', 'B');
+g.addEdge('A', 'C');
+g.addEdge('B', 'D');
+g.addEdge('C', 'E');
+g.addEdge('D', 'E');
+g.addEdge('D', 'F');
+g.addEdge('E', 'F');
