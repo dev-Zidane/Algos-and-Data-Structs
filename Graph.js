@@ -71,6 +71,72 @@ class Graph {
 		})(start); // Immediately invoke the dfs function with the start vertex
 		return result; // Return the result array
 	}
+
+	// Iterative DFS method
+	dfsIterative(start) {
+		// Create a stack and push the starting vertex onto it
+		const stack = [start];
+
+		// Create a result array to store the order of traversal
+		const result = [];
+
+		// Create an object to store visited vertices
+		const visited = { [start]: true };
+
+		let currentVertex;
+
+		// Continue as long as there are vertices on the stack
+		while (stack.length) {
+			// Pop a vertex from the stack
+			currentVertex = stack.pop();
+
+			// Add it to the result array
+			result.push(currentVertex);
+
+			// Visit all neighbors of the current vertex
+			this.adjacencyList[currentVertex].forEach((neighbour) => {
+				if (!visited[neighbour]) {
+					visited[neighbour] = true;
+					// Mark the neighbor as visited
+					result.push(neighbour);
+					// Add the neighbor to the stack
+					stack.push(neighbour);
+				}
+			});
+			return result;
+		}
+	}
+
+	// BFS method
+	bfs(start) {
+		// Create a queue and enqueue the starting vertex
+		const queue = [start];
+		// Create a result array to store the order of traversal
+		const result = [];
+		// Create an object to store visited vertices
+		const visited = { [start]: true };
+
+		let currentVertex;
+
+		// Continue as long as there are vertices in the queue
+		while (queue.length) {
+			// Dequeue a vertex from the queue
+			currentVertex = queue.shift();
+			// Add it to the result array
+			result.push(currentVertex);
+
+			// Visit all neighbors of the current vertex
+			this.adjacencyList[currentVertex].forEach((neighbour) => {
+				if (!visited[neighbour]) {
+					// Mark the neighbor as visited
+					visited[neighbour] = true;
+					// Enqueue the neighbor
+					queue.push(neighbour);
+				}
+			});
+		}
+		return result;
+	}
 }
 
 let g = new Graph();
