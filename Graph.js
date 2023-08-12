@@ -128,7 +128,7 @@ class Graph {
 			// Visit all neighbors of the current vertex
 			this.adjacencyList[currentVertex].forEach((neighbour) => {
 				if (!visited[neighbour]) {
-					// Mark the neighbor as visited
+					// Mark the neighbor as visitedgit
 					visited[neighbour] = true;
 					// Enqueue the neighbor
 					queue.push(neighbour);
@@ -139,19 +139,19 @@ class Graph {
 	}
 }
 
-let g = new Graph();
+let graph = new Graph();
 
-g.addVertex('A');
-g.addVertex('B');
-g.addVertex('C');
-g.addVertex('D');
-g.addVertex('E');
-g.addVertex('F');
+graph.addVertex('A');
+graph.addVertex('B');
+graph.addVertex('C');
+graph.addVertex('D');
+graph.addVertex('E');
+graph.addVertex('F');
 
-g.addEdge('A', 'B');
-g.addEdge('A', 'C');
-g.addEdge('B', 'D');
-g.addEdge('C', 'E');
-g.addEdge('D', 'E');
-g.addEdge('D', 'F');
-g.addEdge('E', 'F');
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('B', 'D');
+graph.addEdge('C', 'E');
+graph.addEdge('D', 'E');
+graph.addEdge('D', 'F');
+graph.addEdge('E', 'F');
