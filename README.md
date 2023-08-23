@@ -1,2 +1,2 @@
 ﻿# Algos-and-Data-Structs
-An overview of Data Structures and ALgorithms with JavaScript.
+An overview of Data Structures and Algorithms with JavaScript.
